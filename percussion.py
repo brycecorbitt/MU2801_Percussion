@@ -8,7 +8,7 @@ class PercussionMotor(object):
     self.sensor = ADC.add_channel(analog_channel)
     self.driver = DCDriver(en, in1, in2)
     self.driver.set_direction(0)
-    self.sensor_thresh = 255
+    self.sensor_thresh = 1024
 
 
   def set_sensor_thresh(self, value):
@@ -26,7 +26,7 @@ class PercussionMotor(object):
     elapsed_time = time.time() - start_time
     self.driver.set_direction(1)
     if(elapsed_time > PercussionMotor.delay_time):
-      elapsed_time -= PercussionMotor.delay_time
+      elapsed_time = PercussionMotor.delay_time
     else:
       elapsed_time = PercussionMotor.delay_time
     time.sleep(elapsed_time)
